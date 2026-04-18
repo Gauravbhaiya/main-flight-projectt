@@ -2,9 +2,6 @@ version: '3.8'
 
 services:
 
-  # ─────────────────────────────────────────
-  # MySQL Database
-  # ─────────────────────────────────────────
   mysql:
     image: mysql:8.0
     container_name: mysql
@@ -24,9 +21,6 @@ services:
       timeout: 5s
       retries: 5
 
-  # ─────────────────────────────────────────
-  # Zookeeper (required by Kafka)
-  # ─────────────────────────────────────────
   zookeeper:
     image: confluentinc/cp-zookeeper:7.5.0
     container_name: zookeeper
@@ -39,9 +33,6 @@ services:
     networks:
       - flight-network
 
-  # ─────────────────────────────────────────
-  # Kafka Broker
-  # ─────────────────────────────────────────
   kafka:
     image: confluentinc/cp-kafka:7.5.0
     container_name: kafka
@@ -59,16 +50,14 @@ services:
     networks:
       - flight-network
     healthcheck:
-      test: ["CMD", "kafka-broker-api-versions", "--bootstrap-server", "localhost:9092"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
+      test: ["CMD", "kafka-topics", "--bootstrap-server", "localhost:9092", "--list"]
+      interval: 15s
+      timeout: 10s
+      retries: 10
+      start_period: 30s
 
-  # ─────────────────────────────────────────
-  # Service Registry (Eureka) - Start First
-  # ─────────────────────────────────────────
   service-registry:
-    build: ./FlightBooking-mainn/service-registry
+    image: gaurav1231/service-registry:latest
     container_name: service-registry
     restart: always
     ports:
@@ -81,11 +70,8 @@ services:
       timeout: 5s
       retries: 5
 
-  # ─────────────────────────────────────────
-  # Profile Management Service
-  # ─────────────────────────────────────────
   profilemanagement-service:
-    build: ./FlightBooking-mainn/profilemanagement-service
+    image: gaurav1231/profilemanagement-service:latest
     container_name: profilemanagement-service
     restart: always
     depends_on:
@@ -100,14 +86,13 @@ services:
       SPRING_DATASOURCE_USERNAME: root
       SPRING_DATASOURCE_PASSWORD: Gaurav@123
       EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://service-registry:8761/eureka/
+      EUREKA_INSTANCE_PREFER_IP_ADDRESS: "true"
+      EUREKA_INSTANCE_HOSTNAME: profilemanagement-service
     networks:
       - flight-network
 
-  # ─────────────────────────────────────────
-  # Flight and Search Service
-  # ─────────────────────────────────────────
   flight-and-search-service:
-    build: ./FlightBooking-mainn/flight-and-search-service
+    image: gaurav1231/flight-and-search-service:latest
     container_name: flight-and-search-service
     restart: always
     depends_on:
@@ -122,14 +107,13 @@ services:
       SPRING_DATASOURCE_USERNAME: root
       SPRING_DATASOURCE_PASSWORD: Gaurav@123
       EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://service-registry:8761/eureka/
+      EUREKA_INSTANCE_PREFER_IP_ADDRESS: "true"
+      EUREKA_INSTANCE_HOSTNAME: flight-and-search-service
     networks:
       - flight-network
 
-  # ─────────────────────────────────────────
-  # Booking Service
-  # ─────────────────────────────────────────
   booking-service:
-    build: ./FlightBooking-mainn/booking-service
+    image: gaurav1231/booking-service:latest
     container_name: booking-service
     restart: always
     depends_on:
@@ -147,14 +131,13 @@ services:
       SPRING_DATASOURCE_PASSWORD: Gaurav@123
       EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://service-registry:8761/eureka/
       SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka:9092
+      EUREKA_INSTANCE_PREFER_IP_ADDRESS: "true"
+      EUREKA_INSTANCE_HOSTNAME: booking-service
     networks:
       - flight-network
 
-  # ─────────────────────────────────────────
-  # Fare Service
-  # ─────────────────────────────────────────
   fare-service:
-    build: ./FlightBooking-mainn/fare-service
+    image: gaurav1231/fare-service:latest
     container_name: fare-service
     restart: always
     depends_on:
@@ -172,14 +155,13 @@ services:
       SPRING_DATASOURCE_PASSWORD: Gaurav@123
       EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://service-registry:8761/eureka/
       SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka:9092
+      EUREKA_INSTANCE_PREFER_IP_ADDRESS: "true"
+      EUREKA_INSTANCE_HOSTNAME: fare-service
     networks:
       - flight-network
 
-  # ─────────────────────────────────────────
-  # API Gateway
-  # ─────────────────────────────────────────
   api-gateway:
-    build: ./FlightBooking-mainn/api-gateway
+    image: gaurav1231/api-gateway:latest
     container_name: api-gateway
     restart: always
     depends_on:
@@ -189,14 +171,14 @@ services:
       - "8765:8765"
     environment:
       EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://service-registry:8761/eureka/
+      EUREKA_INSTANCE_PREFER_IP_ADDRESS: "true"
+      EUREKA_INSTANCE_HOSTNAME: api-gateway
+      SPRING_PROFILES_ACTIVE: docker
     networks:
       - flight-network
 
-  # ─────────────────────────────────────────
-  # Angular Frontend
-  # ─────────────────────────────────────────
   angular-frontend:
-    build: ./flight-booking-angular
+    image: gaurav1231/angular-frontend:latest
     container_name: angular-frontend
     restart: always
     depends_on:
@@ -206,9 +188,6 @@ services:
     networks:
       - flight-network
 
-# ─────────────────────────────────────────
-# Volumes & Networks
-# ─────────────────────────────────────────
 volumes:
   mysql_data:
 
