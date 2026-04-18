@@ -1,0 +1,27 @@
+# Dependencies
+node_modules/
+
+# Angular build cache
+.angular/
+
+# Build output
+dist/
+
+# Environment files with secrets
+src/environments/environment.prod.ts
+
+# IDE
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+# Logs
+*.log
+npm-debug.log*
+
+# OS
+.DS_Store
+Thumbs.db

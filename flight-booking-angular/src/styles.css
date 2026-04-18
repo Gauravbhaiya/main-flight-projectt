@@ -1,0 +1,278 @@
+/* Import Mobile Responsive Styles */
+@import url('./mobile-responsive.css');
+@import url('./mobile-flight-card.css');
+@import url('./mobile-layout.css');
+@import url('./dark-mode-fix.css');
+
+/* Global Styles */
+:root {
+  /* Default Light Theme */
+  --primary-color: #667eea;
+  --secondary-color: #764ba2;
+  --accent-color: #4facfe;
+  --bg-color: #ffffff;
+  --surface-color: #f8fafc;
+  --text-color: #2d3748;
+  --text-secondary-color: #4a5568;
+  --border-color: #e2e8f0;
+  
+  /* Gradients */
+  --bg-gradient: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+  --card-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --card-shadow-hover: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* Dark Theme */
+body.theme-dark {
+  --bg-color: #1a202c;
+  --surface-color: #2d3748;
+  --text-color: #f7fafc;
+  --text-secondary-color: #e2e8f0;
+  --border-color: #4a5568;
+  --card-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  --card-shadow-hover: 0 8px 25px rgba(0, 0, 0, 0.4);
+}
+
+/* Ocean Theme */
+body.theme-ocean {
+  --primary-color: #0ea5e9;
+  --secondary-color: #0284c7;
+  --accent-color: #38bdf8;
+  --bg-color: #f0f9ff;
+  --surface-color: #e0f2fe;
+  --text-color: #0c4a6e;
+  --text-secondary-color: #075985;
+  --border-color: #bae6fd;
+}
+
+/* Sunset Theme */
+body.theme-sunset {
+  --primary-color: #f97316;
+  --secondary-color: #ea580c;
+  --accent-color: #fb923c;
+  --bg-color: #fff7ed;
+  --surface-color: #ffedd5;
+  --text-color: #9a3412;
+  --text-secondary-color: #c2410c;
+  --border-color: #fed7aa;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: all 0.3s ease;
+}
+
+* {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Form Styles */
+.form-group {
+  margin-bottom: 1rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: #555;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  font-size: 1rem;
+  background: var(--bg-color);
+  color: var(--text-color);
+  transition: all 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.25);
+}
+
+/* Button Styles */
+.btn {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  font-weight: 600;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-primary {
+  background: var(--bg-gradient);
+  color: white;
+  border: none;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--card-shadow-hover);
+}
+
+.btn-success {
+  background-color: #28a745;
+  color: white;
+}
+
+.btn-success:hover {
+  background-color: #218838;
+}
+
+.btn-danger {
+  background-color: #dc3545;
+  color: white;
+}
+
+.btn-danger:hover {
+  background-color: #c82333;
+}
+
+.btn:disabled {
+  background-color: #6c757d;
+  cursor: not-allowed;
+}
+
+/* Card Styles */
+.card, .premium-flight-card, .booking-card, .payment-card {
+  background: var(--surface-color) !important;
+  border-radius: 8px;
+  box-shadow: var(--card-shadow);
+  padding: 1.5rem;
+  margin-bottom: 1rem;
+  border: 1px solid var(--border-color) !important;
+  color: var(--text-color) !important;
+  transition: all 0.3s ease;
+}
+
+.card:hover, .premium-flight-card:hover, .booking-card:hover {
+  box-shadow: var(--card-shadow-hover);
+}
+
+/* Main content background */
+.main-content, .section-content {
+  background: var(--bg-color) !important;
+  color: var(--text-color) !important;
+}
+
+/* Text colors */
+h1, h2, h3, h4, h5, h6 {
+  color: var(--text-color) !important;
+}
+
+p, span, div {
+  color: var(--text-color);
+}
+
+.text-secondary {
+  color: var(--text-secondary-color) !important;
+}
+
+/* Utility Classes */
+.text-center {
+  text-align: center;
+}
+
+.text-success {
+  color: #28a745;
+}
+
+.text-danger {
+  color: #dc3545;
+}
+
+.text-primary {
+  color: #007bff;
+}
+
+.mt-1 { margin-top: 0.25rem; }
+.mt-2 { margin-top: 0.5rem; }
+.mt-3 { margin-top: 1rem; }
+.mt-4 { margin-top: 1.5rem; }
+
+.mb-1 { margin-bottom: 0.25rem; }
+.mb-2 { margin-bottom: 0.5rem; }
+.mb-3 { margin-bottom: 1rem; }
+.mb-4 { margin-bottom: 1.5rem; }
+
+.p-1 { padding: 0.25rem; }
+.p-2 { padding: 0.5rem; }
+.p-3 { padding: 1rem; }
+.p-4 { padding: 1.5rem; }
+
+/* Theme Override - Force theme colors on all elements */
+.theme-dark {
+  --bg-color: #1a202c !important;
+  --surface-color: #2d3748 !important;
+  --text-color: #f7fafc !important;
+  --text-secondary-color: #e2e8f0 !important;
+  --border-color: #4a5568 !important;
+}
+
+.theme-ocean {
+  --bg-color: #f0f9ff !important;
+  --surface-color: #e0f2fe !important;
+  --text-color: #0c4a6e !important;
+  --text-secondary-color: #075985 !important;
+  --border-color: #bae6fd !important;
+}
+
+.theme-sunset {
+  --bg-color: #fff7ed !important;
+  --surface-color: #ffedd5 !important;
+  --text-color: #9a3412 !important;
+  --text-secondary-color: #c2410c !important;
+  --border-color: #fed7aa !important;
+}
+
+/* Apply to all major containers */
+body.theme-dark, body.theme-ocean, body.theme-sunset, body.theme-light,
+html.theme-dark, html.theme-ocean, html.theme-sunset, html.theme-light {
+  background-color: var(--bg-color) !important;
+  color: var(--text-color) !important;
+}
+
+/* Apply to all cards and containers */
+.theme-dark .card, .theme-dark .premium-flight-card, .theme-dark .booking-card,
+.theme-ocean .card, .theme-ocean .premium-flight-card, .theme-ocean .booking-card,
+.theme-sunset .card, .theme-sunset .premium-flight-card, .theme-sunset .booking-card,
+.theme-light .card, .theme-light .premium-flight-card, .theme-light .booking-card {
+  background: var(--surface-color) !important;
+  color: var(--text-color) !important;
+  border-color: var(--border-color) !important;
+}
+
+/* Text elements */
+.theme-dark h1, .theme-dark h2, .theme-dark h3, .theme-dark h4, .theme-dark h5, .theme-dark h6,
+.theme-ocean h1, .theme-ocean h2, .theme-ocean h3, .theme-ocean h4, .theme-ocean h5, .theme-ocean h6,
+.theme-sunset h1, .theme-sunset h2, .theme-sunset h3, .theme-sunset h4, .theme-sunset h5, .theme-sunset h6 {
+  color: var(--text-color) !important;
+}

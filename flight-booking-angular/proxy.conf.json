@@ -1,0 +1,32 @@
+{
+  "/auth/*": {
+    "target": "http://localhost:8765",
+    "secure": false,
+    "changeOrigin": true,
+    "logLevel": "debug"
+  },
+  "/flight/*": {
+    "target": "http://localhost:8765",
+    "secure": false,
+    "changeOrigin": true,
+    "logLevel": "debug"
+  },
+  "/booking/*": {
+    "target": "http://localhost:8765",
+    "secure": false,
+    "changeOrigin": true,
+    "logLevel": "debug"
+  },
+  "/profile/*": {
+    "target": "http://localhost:8765",
+    "secure": false,
+    "changeOrigin": true,
+    "logLevel": "debug"
+  },
+  "/api/payment/*": {
+    "target": "http://localhost:8765",
+    "secure": false,
+    "changeOrigin": true,
+    "logLevel": "debug"
+  }
+}

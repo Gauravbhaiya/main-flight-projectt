@@ -1,0 +1,396 @@
+/* Dark Mode Text Visibility Fix */
+body.theme-dark,
+html.theme-dark {
+  --bg-color: #1a202c !important;
+  --surface-color: #2d3748 !important;
+  --text-color: #f7fafc !important;
+  --text-secondary-color: #e2e8f0 !important;
+  --border-color: #4a5568 !important;
+  --card-bg: #2d3748 !important;
+  --modal-bg: #2d3748 !important;
+  --input-bg: #374151 !important;
+}
+
+/* Dark Mode Main Content */
+body.theme-dark .main-content {
+  background: #1a202c !important;
+  color: #f7fafc !important;
+}
+
+/* Dark Mode Cards */
+body.theme-dark .premium-flight-card,
+body.theme-dark .booking-card,
+body.theme-dark .payment-card,
+body.theme-dark .card {
+  background: #2d3748 !important;
+  color: #f7fafc !important;
+  border-color: #4a5568 !important;
+}
+
+/* Dark Mode Text Elements */
+body.theme-dark h1,
+body.theme-dark h2,
+body.theme-dark h3,
+body.theme-dark h4,
+body.theme-dark h5,
+body.theme-dark h6,
+body.theme-dark .section-main-title,
+body.theme-dark .results-title,
+body.theme-dark .flight-code,
+body.theme-dark .city-code,
+body.theme-dark .airline-name {
+  color: #f7fafc !important;
+}
+
+/* Dark Mode Secondary Text */
+body.theme-dark .section-main-subtitle,
+body.theme-dark .airline-title,
+body.theme-dark .city-name,
+body.theme-dark .info-text,
+body.theme-dark .text-secondary {
+  color: #e2e8f0 !important;
+}
+
+/* Dark Mode Search Widget */
+body.theme-dark .search-widget,
+body.theme-dark .search-grid {
+  background: #2d3748 !important;
+  color: #f7fafc !important;
+}
+
+body.theme-dark .field-input {
+  background: #374151 !important;
+  color: #f7fafc !important;
+  border-color: #4a5568 !important;
+}
+
+body.theme-dark .field-label {
+  background: #2d3748 !important;
+  color: #e2e8f0 !important;
+}
+
+/* Dark Mode Dropdowns */
+body.theme-dark .city-dropdown {
+  background: #374151 !important;
+  border-color: #4a5568 !important;
+}
+
+body.theme-dark .city-option {
+  color: #f7fafc !important;
+}
+
+body.theme-dark .city-option:hover {
+  background: linear-gradient(135deg, #667eea, #764ba2) !important;
+  color: white !important;
+}
+
+/* Dark Mode Section Headers */
+body.theme-dark .section-header-main {
+  background: #2d3748 !important;
+  color: #f7fafc !important;
+  border-color: #4a5568 !important;
+}
+
+body.theme-dark .results-header {
+  background: #2d3748 !important;
+  color: #f7fafc !important;
+  border-color: #4a5568 !important;
+}
+
+/* Dark Mode Flight Info */
+body.theme-dark .departure-time,
+body.theme-dark .arrival-time {
+  color: #667eea !important;
+}
+
+body.theme-dark .feature-tag {
+  background: rgba(102,126,234,0.2) !important;
+  color: #a5b4fc !important;
+  border-color: rgba(102,126,234,0.3) !important;
+}
+
+body.theme-dark .info-item {
+  color: #e2e8f0 !important;
+}
+
+/* Dark Mode Route Display */
+body.theme-dark .route-display {
+  background: rgba(102,126,234,0.1) !important;
+  border-color: rgba(102,126,234,0.2) !important;
+}
+
+/* Dark Mode Empty States */
+body.theme-dark .empty-state {
+  background: #2d3748 !important;
+  color: #f7fafc !important;
+}
+
+body.theme-dark .empty-title {
+  color: #f7fafc !important;
+}
+
+body.theme-dark .empty-description {
+  color: #e2e8f0 !important;
+}
+
+/* Dark Mode Profile */
+body.theme-dark .profile-header-card {
+  background: #2d3748 !important;
+  color: #f7fafc !important;
+}
+
+body.theme-dark .profile-name {
+  color: #f7fafc !important;
+}
+
+body.theme-dark .profile-email {
+  color: #e2e8f0 !important;
+}
+
+body.theme-dark .stat-card {
+  background: #374151 !important;
+  color: #f7fafc !important;
+}
+
+body.theme-dark .stat-number {
+  color: #667eea !important;
+}
+
+body.theme-dark .stat-label {
+  color: #e2e8f0 !important;
+}
+
+/* Dark Mode Booking Details */
+body.theme-dark .booking-header {
+  color: #f7fafc !important;
+}
+
+body.theme-dark .id-number {
+  color: #f7fafc !important;
+}
+
+body.theme-dark .passenger-info,
+body.theme-dark .seat-info,
+body.theme-dark .amount-info {
+  color: #e2e8f0 !important;
+}
+
+/* Dark Mode Payment Details */
+body.theme-dark .payment-amount {
+  color: #f7fafc !important;
+}
+
+body.theme-dark .detail-value {
+  color: #f7fafc !important;
+}
+
+body.theme-dark .detail-label {
+  color: #e2e8f0 !important;
+}
+
+/* Dark Mode Airlines Showcase */
+body.theme-dark .airlines-showcase {
+  background: #2d3748 !important;
+}
+
+body.theme-dark .showcase-title {
+  color: #f7fafc !important;
+}
+
+body.theme-dark .showcase-subtitle {
+  color: #e2e8f0 !important;
+}
+
+body.theme-dark .airline-card {
+  background: #374151 !important;
+  color: #f7fafc !important;
+}
+
+/* Dark Mode Modals */
+body.theme-dark .innovative-booking-modal,
+body.theme-dark .payment-modal {
+  background: #2d3748 !important;
+  color: #f7fafc !important;
+}
+
+body.theme-dark .flight-summary {
+  background: #374151 !important;
+}
+
+body.theme-dark .summary-card {
+  background: #2d3748 !important;
+  color: #f7fafc !important;
+}
+
+body.theme-dark .card-title {
+  color: #f7fafc !important;
+}
+
+body.theme-dark .section {
+  background: #2d3748 !important;
+  color: #f7fafc !important;
+}
+
+body.theme-dark .section-title h3 {
+  color: #f7fafc !important;
+}
+
+body.theme-dark .section-title p {
+  color: #e2e8f0 !important;
+}
+
+/* Dark Mode Form Elements */
+body.theme-dark .input-field input,
+body.theme-dark .input-field select {
+  background: #374151 !important;
+  color: #f7fafc !important;
+  border-color: #4a5568 !important;
+}
+
+body.theme-dark .input-field label {
+  color: #e2e8f0 !important;
+}
+
+/* Dark Mode Price Summary */
+body.theme-dark .price-card {
+  background: #374151 !important;
+  color: #f7fafc !important;
+}
+
+body.theme-dark .price-card h4 {
+  color: #f7fafc !important;
+}
+
+body.theme-dark .price-row {
+  color: #f7fafc !important;
+  border-color: #4a5568 !important;
+}
+
+/* Light Mode Hero Text Fix */
+body:not(.theme-dark) .main-title,
+body:not(.theme-dark) .title-word {
+  color: #ffffff !important;
+  text-shadow: 0 4px 8px rgba(0,0,0,0.3) !important;
+}
+
+body:not(.theme-dark) .main-subtitle {
+  color: rgba(255,255,255,0.9) !important;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.2) !important;
+}
+
+/* Dark Mode Hero Text */
+body.theme-dark .main-title,
+body.theme-dark .title-word {
+  color: #ffffff !important;
+  text-shadow: 0 4px 8px rgba(0,0,0,0.5) !important;
+}
+
+body.theme-dark .main-subtitle {
+  color: rgba(255,255,255,0.9) !important;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.3) !important;
+}
+
+/* Dark Mode Dropdown Menu Fix */
+body.theme-dark .dropdown-menu {
+  background: #2d3748 !important;
+  border-color: #4a5568 !important;
+}
+
+body.theme-dark .dropdown-item {
+  color: #ffffff !important;
+}
+
+body.theme-dark .dropdown-item:hover {
+  color: #ffffff !important;
+  background: linear-gradient(135deg, #667eea, #764ba2) !important;
+}
+
+body.theme-dark .item-icon {
+  color: #ffffff !important;
+}
+
+body.theme-dark .dropdown-divider {
+  background: #4a5568 !important;
+}
+
+/* Dark Mode Status Colors Fix */
+body.theme-dark .booking-status.pending {
+  background: #fbbf24 !important;
+  color: #1f2937 !important;
+}
+
+body.theme-dark .booking-status.confirmed {
+  background: #10b981 !important;
+  color: #ffffff !important;
+}
+
+body.theme-dark .booking-status.cancelled {
+  background: #ef4444 !important;
+  color: #ffffff !important;
+}
+
+body.theme-dark .booking-status.completed {
+  background: #3b82f6 !important;
+  color: #ffffff !important;
+}
+
+body.theme-dark .payment-status.pending {
+  background: #fbbf24 !important;
+  color: #1f2937 !important;
+}
+
+body.theme-dark .payment-status.confirmed,
+body.theme-dark .payment-status.paid {
+  background: #10b981 !important;
+  color: #ffffff !important;
+}
+
+body.theme-dark .payment-status.failed {
+  background: #ef4444 !important;
+  color: #ffffff !important;
+}
+
+body.theme-dark .status-dot {
+  background: currentColor !important;
+}
+
+body.theme-dark .status-text {
+  font-weight: 700 !important;
+}
+
+/* Dark Mode Mobile Specific */
+@media (max-width: 768px) {
+  body.theme-dark .main-content {
+    background: #1a202c !important;
+  }
+
+  body.theme-dark .section-header-main {
+    background: #2d3748 !important;
+    border-color: #4a5568 !important;
+  }
+
+  body.theme-dark .results-header {
+    background: #2d3748 !important;
+    border-color: #4a5568 !important;
+  }
+
+  body.theme-dark .search-widget {
+    background: #2d3748 !important;
+    border-color: #4a5568 !important;
+  }
+
+  body.theme-dark .nav-links {
+    background: rgba(45,55,72,0.95) !important;
+    border-color: #4a5568 !important;
+  }
+
+  body.theme-dark .nav-link {
+    color: #e2e8f0 !important;
+  }
+
+  body.theme-dark .nav-link.active {
+    background: rgba(102,126,234,0.2) !important;
+    color: #a5b4fc !important;
+    border-color: rgba(102,126,234,0.3) !important;
+  }
+}

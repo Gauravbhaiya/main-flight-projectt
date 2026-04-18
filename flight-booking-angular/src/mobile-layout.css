@@ -1,0 +1,434 @@
+/* Mobile Layout Positioning - Real App Look */
+@media (max-width: 768px) {
+  /* Full Screen Mobile Layout */
+  .modern-dashboard {
+    padding: 0;
+    margin: 0;
+  }
+
+  /* Mobile Header - Fixed Top */
+  .hero-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    min-height: auto;
+    height: auto;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  }
+
+  .hero-header.compact {
+    min-height: 60px;
+    height: 60px;
+  }
+
+  /* Mobile Navigation - Top Bar */
+  .navbar {
+    padding: 0.5rem 1rem;
+    margin: 0;
+    border-radius: 0;
+    background: rgba(255,255,255,0.1);
+    backdrop-filter: blur(20px);
+    border: none;
+    border-bottom: 1px solid rgba(255,255,255,0.2);
+  }
+
+  /* Mobile Brand - Smaller */
+  .brand {
+    gap: 0.5rem;
+  }
+
+  .brand-logo {
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+  }
+
+  .brand-name {
+    font-size: 1rem;
+  }
+
+  .brand-tagline {
+    font-size: 0.6rem;
+  }
+
+  /* Mobile Nav Links - Bottom Tab Bar Style */
+  .nav-links {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(255,255,255,0.95);
+    backdrop-filter: blur(20px);
+    padding: 0.5rem;
+    border-radius: 0;
+    border-top: 1px solid rgba(0,0,0,0.1);
+    box-shadow: 0 -4px 20px rgba(0,0,0,0.1);
+    z-index: 1001;
+    justify-content: space-around;
+    gap: 0;
+  }
+
+  .nav-link {
+    flex-direction: column;
+    padding: 0.5rem 0.3rem;
+    border-radius: 8px;
+    color: #4a5568;
+    min-width: auto;
+    flex: 1;
+    max-width: 60px;
+  }
+
+  .nav-link.active {
+    background: linear-gradient(135deg, rgba(102,126,234,0.1), rgba(118,75,162,0.1));
+    color: #667eea;
+    border: 1px solid rgba(102,126,234,0.2);
+  }
+
+  .nav-icon {
+    font-size: 1.1rem;
+    margin-bottom: 0.1rem;
+  }
+
+  .nav-text {
+    font-size: 0.6rem;
+    font-weight: 600;
+  }
+
+  /* Mobile User Section - Top Right */
+  .user-section {
+    gap: 0.5rem;
+  }
+
+  .user-avatar {
+    width: 32px;
+    height: 32px;
+    font-size: 0.8rem;
+  }
+
+  .user-info {
+    display: none; /* Hide on mobile to save space */
+  }
+
+  .notification-btn {
+    padding: 0.5rem;
+    width: 36px;
+    height: 36px;
+  }
+
+  .dropdown-toggle {
+    padding: 0.4rem;
+    width: 32px;
+    height: 32px;
+  }
+
+  /* Main Content - Mobile App Style */
+  .main-content {
+    padding-top: 120px; /* Space for fixed header */
+    padding-bottom: 80px; /* Space for bottom nav */
+    padding-left: 0;
+    padding-right: 0;
+    min-height: 100vh;
+    background: #f8fafc;
+  }
+
+  /* Hero Section - Mobile Compact */
+  .hero-section {
+    padding: 1rem;
+    text-align: left;
+  }
+
+  .main-title {
+    font-size: 1.8rem;
+    text-align: left;
+    margin-bottom: 0.5rem;
+  }
+
+  .main-subtitle {
+    font-size: 0.9rem;
+    text-align: left;
+    margin-bottom: 1rem;
+    opacity: 0.9;
+  }
+
+  /* Search Widget - Mobile Card Style */
+  .search-widget {
+    margin: 0 1rem 1rem 1rem;
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    border: 1px solid #e2e8f0;
+  }
+
+  .search-grid {
+    background: white;
+    padding: 1rem;
+    border-radius: 16px;
+    box-shadow: none;
+  }
+
+  /* Section Content - Mobile Cards */
+  .section-content {
+    padding: 0;
+    background: #f8fafc;
+  }
+
+  .section-header-main {
+    background: white;
+    padding: 1rem;
+    margin: 0 0 1rem 0;
+    border-bottom: 1px solid #e2e8f0;
+    position: sticky;
+    top: 60px;
+    z-index: 100;
+  }
+
+  .section-main-title {
+    font-size: 1.4rem;
+    margin-bottom: 0.3rem;
+  }
+
+  .section-main-subtitle {
+    font-size: 0.85rem;
+    opacity: 0.7;
+  }
+
+  /* Flight Results - Mobile List Style */
+  .flight-results {
+    background: #f8fafc;
+    padding: 0;
+    margin: 0;
+  }
+
+  .results-header {
+    background: white;
+    padding: 1rem;
+    margin: 0 0 0.5rem 0;
+    border-bottom: 1px solid #e2e8f0;
+    position: sticky;
+    top: 120px;
+    z-index: 99;
+  }
+
+  .results-title {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+  }
+
+  /* Flight Cards Container - Mobile List */
+  .flight-cards {
+    padding: 0.5rem;
+    gap: 0.5rem;
+    background: #f8fafc;
+  }
+
+  /* Bookings Grid - Mobile Stack */
+  .bookings-grid {
+    padding: 0.5rem;
+    gap: 0.5rem;
+    background: #f8fafc;
+  }
+
+  /* Payments Grid - Mobile Stack */
+  .payments-grid {
+    padding: 0.5rem;
+    gap: 0.5rem;
+    background: #f8fafc;
+  }
+
+  /* Profile Container - Mobile Full Width */
+  .profile-container {
+    padding: 0;
+    background: #f8fafc;
+  }
+
+  .profile-header-card {
+    margin: 0 0 1rem 0;
+    border-radius: 0 0 16px 16px;
+    background: white;
+    padding: 1.5rem 1rem;
+  }
+
+  .profile-stats-grid {
+    padding: 0 0.5rem;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .profile-actions {
+    padding: 0 1rem 1rem 1rem;
+    gap: 0.5rem;
+  }
+
+  /* Empty States - Mobile Centered */
+  .empty-state {
+    margin: 2rem 1rem;
+    background: white;
+    border-radius: 16px;
+    padding: 2rem 1rem;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  }
+
+  /* Airlines Showcase - Mobile Horizontal Scroll */
+  .airlines-showcase {
+    margin: 1rem 0;
+    background: white;
+    padding: 1rem 0;
+  }
+
+  .showcase-header {
+    padding: 0 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .airlines-container {
+    padding: 0;
+  }
+
+  /* Flight Slider - Mobile Full Width */
+  .flight-slider {
+    margin: 1rem 0;
+  }
+
+  .slider-container {
+    margin: 0;
+    border-radius: 0;
+    height: 280px;
+  }
+
+  /* Footer - Mobile Compact */
+  .animated-footer {
+    margin-top: 1rem;
+    padding-bottom: 80px; /* Space for bottom nav */
+  }
+
+  .footer-content {
+    padding: 2rem 1rem 1rem;
+  }
+
+  /* Loading States - Mobile Centered */
+  .flight-search-loader {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    max-width: 320px;
+    z-index: 10000;
+  }
+
+  /* Modals - Mobile Full Screen */
+  .booking-modal-overlay,
+  .payment-modal-overlay {
+    padding: 0;
+  }
+
+  .innovative-booking-modal,
+  .payment-modal {
+    width: 100%;
+    height: 100vh;
+    max-height: 100vh;
+    border-radius: 0;
+    margin: 0;
+  }
+
+  .modal-header {
+    padding: 1rem;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  /* Live Counter - Mobile Inline */
+  .live-stats {
+    margin: 0.5rem 0;
+  }
+
+  .live-counter {
+    padding: 0.8rem 1rem;
+    border-radius: 12px;
+    display: inline-flex;
+  }
+
+  .counter-number {
+    font-size: 1.2rem;
+  }
+
+  .counter-label {
+    font-size: 0.7rem;
+  }
+}
+
+/* Landscape Mobile Adjustments */
+@media (max-width: 768px) and (orientation: landscape) {
+  .main-content {
+    padding-top: 60px;
+  }
+
+  .hero-section {
+    padding: 0.5rem 1rem;
+  }
+
+  .main-title {
+    font-size: 1.5rem;
+  }
+
+  .slider-container {
+    height: 220px;
+  }
+}
+
+/* Extra Small Mobile - Tighter Layout */
+@media (max-width: 480px) {
+  .navbar {
+    padding: 0.4rem 0.8rem;
+  }
+
+  .brand-logo {
+    width: 32px;
+    height: 32px;
+  }
+
+  .brand-name {
+    font-size: 0.9rem;
+  }
+
+  .user-avatar {
+    width: 28px;
+    height: 28px;
+    font-size: 0.7rem;
+  }
+
+  .nav-links {
+    padding: 0.4rem;
+  }
+
+  .nav-link {
+    padding: 0.4rem 0.2rem;
+    max-width: 50px;
+  }
+
+  .nav-icon {
+    font-size: 1rem;
+  }
+
+  .nav-text {
+    font-size: 0.55rem;
+  }
+
+  .main-content {
+    padding-top: 100px;
+    padding-bottom: 70px;
+  }
+
+  .search-widget {
+    margin: 0 0.5rem 0.5rem 0.5rem;
+  }
+
+  .flight-cards,
+  .bookings-grid,
+  .payments-grid {
+    padding: 0.3rem;
+  }
+}
