@@ -16,8 +16,6 @@ import { BoardingPassComponent } from './components/boarding-pass.component';
 import { BoardingPassModalComponent } from './components/boarding-pass-modal.component';
 import { EnhancedBoardingPassComponent } from './components/enhanced-boarding-pass.component';
 import { RealisticBoardingPassComponent } from './components/realistic-boarding-pass.component';
-import { ThemeToggleComponent } from './components/theme-toggle.component';
-import { SimpleThemeToggleComponent } from './components/simple-theme-toggle.component';
 import { SimpleDarkLightToggleComponent } from './components/simple-dark-light-toggle.component';
 import { SettingsModalComponent } from './components/settings-modal.component';
 import { UpgradeModalComponent } from './components/upgrade-modal.component';
@@ -49,8 +47,6 @@ const routes: Routes = [
     BoardingPassModalComponent,
     EnhancedBoardingPassComponent,
     RealisticBoardingPassComponent,
-    ThemeToggleComponent,
-    SimpleThemeToggleComponent,
     SimpleDarkLightToggleComponent,
     SettingsModalComponent,
     UpgradeModalComponent,

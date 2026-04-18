@@ -1,9 +1,3 @@
-/* Import Mobile Responsive Styles */
-@import url('./mobile-responsive.css');
-@import url('./mobile-flight-card.css');
-@import url('./mobile-layout.css');
-@import url('./dark-mode-fix.css');
-
 /* Global Styles */
 :root {
   /* Default Light Theme */

@@ -1,0 +1,18 @@
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Angular
+flight-booking-angular/node_modules/
+flight-booking-angular/.angular/
+flight-booking-angular/dist/
+
+# Spring Boot
+FlightBooking-mainn/**/target/
+
+# Logs
+*.log
