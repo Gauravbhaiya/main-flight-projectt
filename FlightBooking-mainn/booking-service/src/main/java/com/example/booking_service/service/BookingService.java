@@ -6,6 +6,7 @@ import com.example.booking_service.exception.PassengerSaveException;
 import com.example.booking_service.feign.FareInterface;
 import com.example.booking_service.feign.FlightInterface;
 import com.example.booking_service.feign.ProfileInterface;
+import com.example.booking_service.kafka.BookingProducer;
 import com.example.booking_service.model.Booking;
 import com.example.booking_service.model.Passenger;
 import com.example.booking_service.repository.BookingRepository;
@@ -35,6 +36,9 @@ public class BookingService {
 
     @Autowired
     ProfileInterface profileInterface;
+
+    @Autowired
+    BookingProducer bookingProducer;
 
     public Optional<Booking> createBooking(BookingDTO bookingDTO) {
         FlightResponseDTO flightResponseDTO = null;
@@ -130,7 +134,15 @@ public class BookingService {
             }
 
             try {
-                return Optional.of(bookingRepository.save(booking));
+                Booking savedBooking = bookingRepository.save(booking);
+                // Send Kafka event to fare-service
+                bookingProducer.sendBookingConfirmed(
+                    "BookingId:" + savedBooking.getId() +
+                    ",FlightId:" + savedBooking.getFlightId() +
+                    ",UserId:" + savedBooking.getUserId() +
+                    ",TotalFare:" + savedBooking.getTotalFare()
+                );
+                return Optional.of(savedBooking);
             } catch (Exception e) {
                 throw new BookingException("Failed to update booking status: " + e.getMessage());
             }
