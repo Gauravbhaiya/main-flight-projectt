@@ -1,0 +1,217 @@
+version: '3.8'
+
+services:
+
+  # ─────────────────────────────────────────
+  # MySQL Database
+  # ─────────────────────────────────────────
+  mysql:
+    image: mysql:8.0
+    container_name: mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: Gaurav@123
+      MYSQL_DATABASE: flight_booking
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - flight-network
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot", "-pGaurav@123"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # ─────────────────────────────────────────
+  # Zookeeper (required by Kafka)
+  # ─────────────────────────────────────────
+  zookeeper:
+    image: confluentinc/cp-zookeeper:7.5.0
+    container_name: zookeeper
+    restart: always
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+    ports:
+      - "2181:2181"
+    networks:
+      - flight-network
+
+  # ─────────────────────────────────────────
+  # Kafka Broker
+  # ─────────────────────────────────────────
+  kafka:
+    image: confluentinc/cp-kafka:7.5.0
+    container_name: kafka
+    restart: always
+    depends_on:
+      - zookeeper
+    ports:
+      - "9092:9092"
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_AUTO_CREATE_TOPICS_ENABLE: "true"
+    networks:
+      - flight-network
+    healthcheck:
+      test: ["CMD", "kafka-broker-api-versions", "--bootstrap-server", "localhost:9092"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # ─────────────────────────────────────────
+  # Service Registry (Eureka) - Start First
+  # ─────────────────────────────────────────
+  service-registry:
+    build: ./FlightBooking-mainn/service-registry
+    container_name: service-registry
+    restart: always
+    ports:
+      - "8761:8761"
+    networks:
+      - flight-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8761/actuator/health"]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+
+  # ─────────────────────────────────────────
+  # Profile Management Service
+  # ─────────────────────────────────────────
+  profilemanagement-service:
+    build: ./FlightBooking-mainn/profilemanagement-service
+    container_name: profilemanagement-service
+    restart: always
+    depends_on:
+      mysql:
+        condition: service_healthy
+      service-registry:
+        condition: service_healthy
+    ports:
+      - "8090:8090"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/flight_booking?createDatabaseIfNotExist=true
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: Gaurav@123
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://service-registry:8761/eureka/
+    networks:
+      - flight-network
+
+  # ─────────────────────────────────────────
+  # Flight and Search Service
+  # ─────────────────────────────────────────
+  flight-and-search-service:
+    build: ./FlightBooking-mainn/flight-and-search-service
+    container_name: flight-and-search-service
+    restart: always
+    depends_on:
+      mysql:
+        condition: service_healthy
+      service-registry:
+        condition: service_healthy
+    ports:
+      - "8085:8085"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/flightdatabase?createDatabaseIfNotExist=true
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: Gaurav@123
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://service-registry:8761/eureka/
+    networks:
+      - flight-network
+
+  # ─────────────────────────────────────────
+  # Booking Service
+  # ─────────────────────────────────────────
+  booking-service:
+    build: ./FlightBooking-mainn/booking-service
+    container_name: booking-service
+    restart: always
+    depends_on:
+      mysql:
+        condition: service_healthy
+      service-registry:
+        condition: service_healthy
+      kafka:
+        condition: service_healthy
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/bookingdatabase?createDatabaseIfNotExist=true
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: Gaurav@123
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://service-registry:8761/eureka/
+      SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka:9092
+    networks:
+      - flight-network
+
+  # ─────────────────────────────────────────
+  # Fare Service
+  # ─────────────────────────────────────────
+  fare-service:
+    build: ./FlightBooking-mainn/fare-service
+    container_name: fare-service
+    restart: always
+    depends_on:
+      mysql:
+        condition: service_healthy
+      service-registry:
+        condition: service_healthy
+      kafka:
+        condition: service_healthy
+    ports:
+      - "8095:8095"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/faredatabase?createDatabaseIfNotExist=true
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: Gaurav@123
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://service-registry:8761/eureka/
+      SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka:9092
+    networks:
+      - flight-network
+
+  # ─────────────────────────────────────────
+  # API Gateway
+  # ─────────────────────────────────────────
+  api-gateway:
+    build: ./FlightBooking-mainn/api-gateway
+    container_name: api-gateway
+    restart: always
+    depends_on:
+      service-registry:
+        condition: service_healthy
+    ports:
+      - "8765:8765"
+    environment:
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://service-registry:8761/eureka/
+    networks:
+      - flight-network
+
+  # ─────────────────────────────────────────
+  # Angular Frontend
+  # ─────────────────────────────────────────
+  angular-frontend:
+    build: ./flight-booking-angular
+    container_name: angular-frontend
+    restart: always
+    depends_on:
+      - api-gateway
+    ports:
+      - "4200:80"
+    networks:
+      - flight-network
+
+# ─────────────────────────────────────────
+# Volumes & Networks
+# ─────────────────────────────────────────
+volumes:
+  mysql_data:
+
+networks:
+  flight-network:
+    driver: bridge

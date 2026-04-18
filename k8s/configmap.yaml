@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: flight-config
+  namespace: flight-app
+data:
+  EUREKA_URL: "http://service-registry:8761/eureka/"
+  KAFKA_SERVERS: "kafka:9092"
+  MYSQL_HOST: "mysql"
+  MYSQL_PORT: "3306"

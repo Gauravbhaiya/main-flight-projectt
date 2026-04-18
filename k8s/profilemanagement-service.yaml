@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: profilemanagement-service
+  namespace: flight-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: profilemanagement-service
+  template:
+    metadata:
+      labels:
+        app: profilemanagement-service
+    spec:
+      containers:
+        - name: profilemanagement-service
+          image: gauravbhaiya/profilemanagement-service:latest
+          ports:
+            - containerPort: 8090
+          env:
+            - name: SPRING_DATASOURCE_URL
+              value: jdbc:mysql://mysql:3306/flight_booking?createDatabaseIfNotExist=true
+            - name: SPRING_DATASOURCE_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: flight-secrets
+                  key: MYSQL_USERNAME
+            - name: SPRING_DATASOURCE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: flight-secrets
+                  key: MYSQL_PASSWORD
+            - name: EUREKA_CLIENT_SERVICEURL_DEFAULTZONE
+              valueFrom:
+                configMapKeyRef:
+                  name: flight-config
+                  key: EUREKA_URL
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: profilemanagement-service
+  namespace: flight-app
+spec:
+  selector:
+    app: profilemanagement-service
+  ports:
+    - port: 8090
+      targetPort: 8090
+  type: ClusterIP
