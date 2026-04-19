@@ -92,11 +92,9 @@ pipeline {
         }
 
         stage('Deploy to Kubernetes') {
+            when { expression { return false } }
             steps {
                 sh "kubectl apply -f k8s/"
-                sh "kubectl set image deployment/booking-service booking-service=$DOCKER_HUB_USER/booking-service:${IMAGE_TAG} -n flight-app"
-                sh "kubectl set image deployment/fare-service fare-service=$DOCKER_HUB_USER/fare-service:${IMAGE_TAG} -n flight-app"
-                sh "kubectl set image deployment/flight-service flight-service=$DOCKER_HUB_USER/flight-and-search-service:${IMAGE_TAG} -n flight-app"
             }
         }
     }
