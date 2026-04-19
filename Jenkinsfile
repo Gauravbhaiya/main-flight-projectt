@@ -18,7 +18,7 @@ pipeline {
         stage('Build - Service Registry') {
             steps {
                 dir('FlightBooking-mainn/service-registry') {
-                    bat 'mvnw.cmd clean package -DskipTests'
+                    sh './mvnw clean package -DskipTests'
                 }
             }
         }
@@ -26,7 +26,7 @@ pipeline {
         stage('Build - Profile Service') {
             steps {
                 dir('FlightBooking-mainn/profilemanagement-service') {
-                    bat 'mvnw.cmd clean package -DskipTests'
+                    sh './mvnw clean package -DskipTests'
                 }
             }
         }
@@ -34,7 +34,7 @@ pipeline {
         stage('Build - Flight Service') {
             steps {
                 dir('FlightBooking-mainn/flight-and-search-service') {
-                    bat 'mvnw.cmd clean package -DskipTests'
+                    sh './mvnw clean package -DskipTests'
                 }
             }
         }
@@ -42,7 +42,7 @@ pipeline {
         stage('Build - Booking Service') {
             steps {
                 dir('FlightBooking-mainn/booking-service') {
-                    bat 'mvnw.cmd clean package -DskipTests'
+                    sh './mvnw clean package -DskipTests'
                 }
             }
         }
@@ -50,7 +50,7 @@ pipeline {
         stage('Build - Fare Service') {
             steps {
                 dir('FlightBooking-mainn/fare-service') {
-                    bat 'mvnw.cmd clean package -DskipTests'
+                    sh './mvnw clean package -DskipTests'
                 }
             }
         }
@@ -58,7 +58,7 @@ pipeline {
         stage('Build - API Gateway') {
             steps {
                 dir('FlightBooking-mainn/api-gateway') {
-                    bat 'mvnw.cmd clean package -DskipTests'
+                    sh './mvnw clean package -DskipTests'
                 }
             }
         }
@@ -67,7 +67,7 @@ pipeline {
             steps {
                 script {
                     withCredentials([usernamePassword(credentialsId: 'dockerhub-credentials', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
-                        bat "docker login -u %DOCKER_USER% -p %DOCKER_PASS%"
+                        sh "docker login -u $DOCKER_USER -p $DOCKER_PASS"
 
                         def services = [
                             'service-registry',
@@ -79,13 +79,13 @@ pipeline {
                         ]
 
                         services.each { service ->
-                            bat "docker build -t %DOCKER_HUB_USER%/${service}:${IMAGE_TAG} FlightBooking-mainn/${service}"
-                            bat "docker push %DOCKER_HUB_USER%/${service}:${IMAGE_TAG}"
+                            sh "docker build -t $DOCKER_HUB_USER/${service}:${IMAGE_TAG} FlightBooking-mainn/${service}"
+                            sh "docker push $DOCKER_HUB_USER/${service}:${IMAGE_TAG}"
                         }
 
                         // Angular
-                        bat "docker build -t %DOCKER_HUB_USER%/angular-frontend:${IMAGE_TAG} flight-booking-angular"
-                        bat "docker push %DOCKER_HUB_USER%/angular-frontend:${IMAGE_TAG}"
+                        sh "docker build -t $DOCKER_HUB_USER/angular-frontend:${IMAGE_TAG} flight-booking-angular"
+                        sh "docker push $DOCKER_HUB_USER/angular-frontend:${IMAGE_TAG}"
                     }
                 }
             }
@@ -93,10 +93,10 @@ pipeline {
 
         stage('Deploy to Kubernetes') {
             steps {
-                bat "kubectl apply -f k8s/"
-                bat "kubectl set image deployment/booking-service booking-service=%DOCKER_HUB_USER%/booking-service:${IMAGE_TAG} -n flight-app"
-                bat "kubectl set image deployment/fare-service fare-service=%DOCKER_HUB_USER%/fare-service:${IMAGE_TAG} -n flight-app"
-                bat "kubectl set image deployment/flight-service flight-service=%DOCKER_HUB_USER%/flight-and-search-service:${IMAGE_TAG} -n flight-app"
+                sh "kubectl apply -f k8s/"
+                sh "kubectl set image deployment/booking-service booking-service=$DOCKER_HUB_USER/booking-service:${IMAGE_TAG} -n flight-app"
+                sh "kubectl set image deployment/fare-service fare-service=$DOCKER_HUB_USER/fare-service:${IMAGE_TAG} -n flight-app"
+                sh "kubectl set image deployment/flight-service flight-service=$DOCKER_HUB_USER/flight-and-search-service:${IMAGE_TAG} -n flight-app"
             }
         }
     }
