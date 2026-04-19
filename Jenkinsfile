@@ -18,7 +18,7 @@ pipeline {
         stage('Build - Service Registry') {
             steps {
                 dir('FlightBooking-mainn/service-registry') {
-                    sh './mvnw clean package -DskipTests'
+                    sh 'chmod +x mvnw && ./mvnw clean package -DskipTests'
                 }
             }
         }
@@ -26,7 +26,7 @@ pipeline {
         stage('Build - Profile Service') {
             steps {
                 dir('FlightBooking-mainn/profilemanagement-service') {
-                    sh './mvnw clean package -DskipTests'
+                    sh 'chmod +x mvnw && ./mvnw clean package -DskipTests'
                 }
             }
         }
@@ -34,7 +34,7 @@ pipeline {
         stage('Build - Flight Service') {
             steps {
                 dir('FlightBooking-mainn/flight-and-search-service') {
-                    sh './mvnw clean package -DskipTests'
+                    sh 'chmod +x mvnw && ./mvnw clean package -DskipTests'
                 }
             }
         }
@@ -42,7 +42,7 @@ pipeline {
         stage('Build - Booking Service') {
             steps {
                 dir('FlightBooking-mainn/booking-service') {
-                    sh './mvnw clean package -DskipTests'
+                    sh 'chmod +x mvnw && ./mvnw clean package -DskipTests'
                 }
             }
         }
@@ -50,7 +50,7 @@ pipeline {
         stage('Build - Fare Service') {
             steps {
                 dir('FlightBooking-mainn/fare-service') {
-                    sh './mvnw clean package -DskipTests'
+                    sh 'chmod +x mvnw && ./mvnw clean package -DskipTests'
                 }
             }
         }
@@ -58,7 +58,7 @@ pipeline {
         stage('Build - API Gateway') {
             steps {
                 dir('FlightBooking-mainn/api-gateway') {
-                    sh './mvnw clean package -DskipTests'
+                    sh 'chmod +x mvnw && ./mvnw clean package -DskipTests'
                 }
             }
         }
